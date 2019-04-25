@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 # For POSIX standard on this utility,
@@ -44,10 +44,16 @@ def get_cur_date(UTC=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=
         'Display the current time in the given FORMAT, or set the system date.')
-    parser.add_argument('format', action='store', type=str,
-                        default='+%a %b %e %H:%M:%S %Z %Y')
-    parser.add_argument('-u', action='store_false')
+    parser.add_argument('format', nargs='?', action='store', type=str,
+                        default='+%a %b %e %H:%M:%S %Z %Y', help=
+                        'controls the output')
+    parser.add_argument('-u', action='store_true', 
+                        help='print or set Coordinated Universal Time(UTC)')
     args = parser.parse_args()
+    if args.format[0] != '+':
+        print('date: invalid date' + args.format, file=sys.stderr)
+        sys.exit(1)
+
     print(get_cur_date(args.u).strftime(args.format[1:]))
 
     

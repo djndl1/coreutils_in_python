@@ -32,7 +32,7 @@ def print_info(args):
 
 
 if __name__ == '__main__':
-    fmt_parser = argparse.ArgumentParser();
+    fmt_parser = argparse.ArgumentParser(description='Print system information');
     fmt_parser.add_argument('-a', help='Print all information',
                             action='store_true')
     fmt_parser.add_argument('-m', help='Hardware identifier',

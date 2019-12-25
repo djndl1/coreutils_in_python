@@ -4,13 +4,13 @@
 import os
 import argparse
 
-
-def print_info(args):
+def unix_uname(args):
     uinfo = os.uname();
     if args.a:
-        print(uinfo.sysname, uinfo.nodename,
-              uinfo.release, uinfo.version, uinfo.machine)
-        return
+        uname_str = uinfo.sysname + ' ' + uinfo.nodename + ' ' + \
+            uinfo.release + ' ' + uinfo.version + ' ' + uinfo.machine
+        return uname_str
+              
     info_str = []
     if args.s:
         info_str.append(uinfo.sysname)
@@ -24,12 +24,10 @@ def print_info(args):
         info_str.append(uinfo.machine)
     if not info_str:
         info_str.append(uinfo.sysname)
-    #print(info_str)
     fmt_str = info_str[0]
     for s in info_str[1:]:
         fmt_str = fmt_str + ' ' + s;
-    print(fmt_str)
-
+    return fmt_str
 
 if __name__ == '__main__':
     fmt_parser = argparse.ArgumentParser(description='Print system information');
@@ -46,4 +44,4 @@ if __name__ == '__main__':
     fmt_parser.add_argument('-v', help='Operating system version',
                             action='store_true')
     args = fmt_parser.parse_args()
-    print_info(args)
+    print(unix_uname(args))

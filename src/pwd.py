@@ -21,9 +21,9 @@ def unix_pwd(args):
     
     if args.P and args.L:
         for arg in reversed(sys.argv):
-            if arg == '-L':
+            if arg == '-L' or arg == '-PL':
                 return pwd_logical
-            elif arg == '-P':
+            elif arg == '-P' or arg == '-LP':
                 return pwd_physical
     elif args.P:
         return pwd_physical
